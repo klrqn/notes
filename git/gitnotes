@@ -1,0 +1,137 @@
+GIT CONFIG (.gitconfig in ~) (lab1)
+$ git config --global user.name "Your Name"
+$ git config --global user.email "your_email@whatever.com"
+
+GIT INIT 
+GIT ADD
+GIT COMMIT
+GIT STATUS
+
+GIT LOG (lab10)
+$ git log --pretty=oneline
+$ git log --pretty=oneline --max-count=2
+$ git log --pretty=oneline --since='5 minutes ago'
+$ git log --pretty=oneline --until='5 minutes ago'
+$ git log --pretty=oneline --author=<your name>
+$ git log --pretty=oneline --all
+*** see man git-log for details ***
+
+Here’s what I use to review the changes made in the last week. I’ll add --author= if I only want to see changes I made.
+$ git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago'
+
+Over time, I’ve decided that I like the following log format for most of my work.
+$ git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+--pretty="..." defines the format of the output.
+%h is the abbreviated hash of the commit
+%d are any decorations on that commit (e.g. branch heads or tags)
+%ad is the author date
+%s is the comment
+%an is the author name
+--graph informs git to display the commit tree in an ASCII graph layout
+--date=short keeps the date format nice and short
+
+================================================================================
+ALIASES (Lab 11)
+git status, git add, git commit, and git checkout are such common commands that it is useful to have abbreviations for them.
+Add the following to the .gitconfig file in your $HOME directory.
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+
+SHELL ALIASES - NOT WORKING? - IN YOUR .profile FILE
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+alias got='git '
+alias get='git '
+
+GETTING OLD VERSIONS (lab 12)
+$ git hist (because you set up the .gitconfig)
+$ git checkout <hash>   -   or you could use $ go <hash>
+$ git checkout master   -   return to latest version in the master branch
+
+TAGGING VERSIONS - (lab 13) - SO YOU DON'T HAVE TO CHECKOUT BY HASH
+$ git tag v1        -     current version is tagged as "v1"
+$ git checkout v1^  -     checkout first ancestor of "v1"   -   go v1^
+$ git tag v1-beta   -     tag current version as "v1-beta"
+
+$ git tag           -     see what tags are available
+$ git hist master --all   check for tags in log
+
+
+UNDOING LOCAL CHANGES (lab 14)
+$ git checkout <file> - will revert file to last commit
+  so if you've made edits to a file and need them to go away, checkout the file again!
+... if you've already staged the file ...
+RESET STAGING AREA (LAB 15)
+$ git reset HEAD <file>       -     status output tells what to do to unstage the change
+
+CREATE A REVERTING COMMIT (Lab 16)
+to undo a committed change, we need to generate a commit that removes changes introduced by our unwanted commit
+$ git revert HEAD
+
+RESET (17)
+When given a commit reference (i.e. a hash, branch or tag name), the reset command will …
+- Rewrite the current branch to point to the specified commit
+- Optionally reset the staging area to match the specified commit
+- Optionally reset the working directory to match the specified commit
+$ git reset --hard v1
+
+Dangers of Reset 
+Resets on local branches are generally safe. Any “accidents” can usually be recovered from by just resetting again with the desired commit.
+However, if the branch is shared on remote repositories, resetting can confuse other users sharing the branch.
+
+REMOVING TAGGING (18)
+$ git tag -d oops
+
+AMEND COMMITS
+$ git commit --amend -m "Add an author/email comment"\
+
+MOVING FILES (lab 20)
+$ mkdir lib
+$ git mv hello.rb lib
+OR
+$ mv hello.rb lib         - move hello.rb into lib dir
+$ git add lib/hello.rb    - add to git
+$ git rm hello.rb
+
+RAKEFILE (lab 21)
+
+THE GIT DIRECTORY
+$ ls -C .git
+This is the magic directory where all the git “stuff” is stored. Let’s peek in the objects directory.
+
+.git/config       -       Project specific config file
+
+THE OBJECT STORE
+$ ls -C .git/objects
+You should see a bunch of directories with 2 letter names. The directory names are the first two letters of the sha1 hash of the object stored in gi
+
+Look in one of the two-letter directories. You should see some files with 38-character names. These are the files that contain the objects stored in git. These files are compressed and encoded, so looking at their contents directly won’t be very helpful
+
+CONFIG FILE
+$ cat .git/config
+This is a project-specific configuration file. Config entries in here will override the config entries in the .gitconfig file in your home directory, at least for this project.
+
+BRANCHES AND TAGS
+$ ls .git/refs
+$ ls .git/refs/heads
+$ ls .git/refs/tags
+You should recognize the files in the tags subdirectory. Each file corresponds to a tag you created with the git tag command earlier. Its content is just the hash of the commit tied to the tag.
+The heads directory is similar, but is used for branches rather than tags. We only have one branch at the moment, so all you will see is master in this directory.
+The HEAD file contains a reference to the current branch.
+
+???
+https://git-scm.com/docs/git-cat-file

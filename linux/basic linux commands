@@ -1,0 +1,174 @@
+http://www.ee.surrey.ac.uk/Teaching/Unix/unix1.html
+
+head -10 file
+tail -10 file
+
+[less]
+Using less, you can search though a text file for a keyword (pattern). For example, to search through science.txt for the word 'science', type
+% less science.txt
+then, still in less, type a forward slash [/] followed by the word to search
+/science
+As you can see, less finds and highlights the keyword. Type [n] to search for the next occurrence of the word.
+
+
+grep is one of many standard UNIX utilities. It searches files for specified words or patterns. First clear the screen, then type
+% grep science science.txt
+% grep science -i science.txt = search for the word science -ignore case in science.txt
+% grep -i 'spinning top' science.txt
+
+-v display those lines that do NOT match 
+-n precede each matching line with the line number 
+-c print only the total count of matched lines 
+
+[wordcount]
+wc (word count)
+A handy little utility is the wc command, short for word count. To do a word count on science.txt, type
+% wc -w science.txt
+% wc -l science.txt = how many lines are there in science.txt
+
+ 'end of file' (^D)
+ 
+Using < you can redirect the input to come from a file rather than the keyboard. 
+For example, to sort the list of fruit, type 
+ % sort < biglist 
+ 
+ SORT
+To output a sorted list (biglist) to a file (slist)
+% sort < biglist > slist
+
+ PIPES
+to swee who is on the system with you, type:
+% who
+
+For example, typing 
+% who | sort 
+will give you a sorted list of who is on the system with you
+To find out how many users are logged on, type 
+% who | wc -l
+
+Pipe the output of command1 to the input of command2
+command1 | command2
+
+Using pipes, display all lines of list1 and list2 containing the letter 'p', and sort the result
+% cat list1 list2 | grep p | sort
+
+WILDCARD *
+% ls list*
+will list all files in cur dir with list...
+% ls *list
+
+WILDCARD?
+%ls ?list
+? char will match exactly one character
+
+In naming files, characters with special meanings such as / * & %
+should be avoided. Also, avoid using spaces within names.
+
+Manual Pages
+% man wc
+% whatis wc
+
+APROPOS
+% apropos keyword
+% apropos copy
+
+CHMOD
+=====================================================
+-rw-r--r-- 1 ubuntu ubuntu   66 Mar  6 15:03 biglist
+% chmod go-rwx biglist 
+-rw------- 1 ubuntu ubuntu   66 Mar  6 15:03 biglist
+% chmod a+rw biglist 
+-rw-rw-rw- 1 ubuntu ubuntu   66 Mar  6 15:03 biglist
+
+u   user
+g   group
+o   other
+a   all
+r   read
+w   write (and delete)
+x   execute (and access directory) 
++   add permission
+-   take away permission
+=====================================================
+
+Processes and Jobs
+A process is an executing program identified by a unique PID (process identifier)
+To see info about your processes with their associated PID type:
+% ps
+
+to background a process, type an & at the end of a CL
+% sleep 10
+% sleep 10 &
+
+You can suspend the process running in the foreground by typing ^Z  ???
+Then to put it in the background, type:
+% bg
+
+Examine the jobs list:
+% jobs
+
+If a process refuses to be killed, uses the -9 option, i.e. type 
+% kill -9 20077 
+Note: It is not possible to kill off other users' processes !!!
+
+
+Other useful Unix Commands
+?
+To check your current quota and how much of it you have used, type 
+% quota -v 
+
+The df command reports on the space left on the file system. For example, to find out how much space is left on the fileserver, type 
+% df . 
+
+The du command outputs the number of kilobyes used by each subdirectory. Useful if you have gone over quota and you want to find out which directory has the most files. In your home-directory, type 
+% du -s *
+
+This reduces the size of a file, thus freeing valuable disk space. For example, type 
+% ls -l science.txt 
+% gzip science.txt 
+% gunzip science.txt.gz 
+
+zcat will read gzipped files without needing to uncompress them first.
+% zcat science.txt.gz
+If the text scrolls too fast for you, pipe the output though less 
+% zcat science.txt.gz | less 
+
+file classifies the named files according to the type of data they contain, for example ascii (text), pictures, compressed data, etc.. To report on all files in your home directory, type 
+% file * 
+
+This command compares the contents of two files and displays the differences. Suppose you have a file called file1 and you edit some part of it and save it as file2. To see the differences type
+% diff file1 file2 
+Lines beginning with a < denotes file1, while lines beginning with a > denotes file2. 
+
+FIND
+To search for all fies with the extention .txt, starting at the current directory (.) and working through all sub-directories, then printing the name of the file to the screen, type
+find all files with extension .txt, print the name of the file to the screen:
+% find . -name "*.txt" -print 
+To find files over 1Mb in size, and display the result as a long listing, type
+% find . -size +1M -ls 
+
+HISTORY
+% history (show command history list)
+If you are using the C shell, you can use the exclamation character (!) to recall commands easily.
+% !! (recall last command)
+% !-3 (recall third most recent command) 
+% !5 (recall 5th command in list) 
+% !grep (recall last command starting with grep) 
+You can increase the size of the history buffer by typing
+% set history=100 
+
+MAKEFILE
+All high-level language code must be converted into a form the computer understands. For example, C language source code is converted into a lower-level language called assembly language. The assembly language code made by the previous stage is then converted into object code which are fragments of code which the computer understands directly. The final stage in compiling a program involves linking the object code to code libraries which contain certain built-in functions. This final stage produces an executable program.
+To do all these steps by hand is complicated and beyond the capability of the ordinary user. A number of utilities and tools have been developed for programmers and end-users to simplify these steps.
+
+The configure shell script attempts to guess correct values for various system-dependent variables used during compilation. It uses those values to create a Makefile in each directory of the package. 
+The simplest way to compile a package is:
+cd to the directory containing the package's source code.
+Type ./configure to configure the package for your system.
+Type make to compile the package.
+Optionally, type make check to run any self-tests that come with the package.
+Type make install to install the programs and any data files and documentation.
+Optionally, type make clean to remove the program binaries and object files from the source code directory  
+The configure utility supports a wide variety of options. You can usually use the --help option to get a list of interesting options for a particular configure script. 
+The only generic options you are likely to use are the --prefix and --exec-prefix options. These options are used to specify the installation directories.   
+
