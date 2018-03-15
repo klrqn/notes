@@ -143,6 +143,7 @@ https://git-scm.com/docs/git-cat-file
 CREATING A BRANCH (Lab 24)
 $ git checkout -b greet
 $ git status
+
 NOTE: git checkout -b <branchname> is a shortcut for git branch <branchname> followed by a git checkout <branchname>.
 
 The --all flag makes sure that we see all the branches. The default is to show only the current branch.
