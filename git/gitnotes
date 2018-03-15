@@ -81,6 +81,7 @@ $ git reset HEAD <file>       -     status output tells what to do to unstage th
 CREATE A REVERTING COMMIT (Lab 16)
 to undo a committed change, we need to generate a commit that removes changes introduced by our unwanted commit
 $ git revert HEAD
+Since we were undoing the very last commit we made, we were able to use HEAD as the argument to revert. We can revert any arbitrary commit earlier in history by simply specifying its hash value.
 
 RESET (17)
 When given a commit reference (i.e. a hash, branch or tag name), the reset command will …
@@ -109,6 +110,8 @@ $ git rm hello.rb
 
 RAKEFILE (lab 21)
 
+================================================================================
+                                GIT INTERNALS
 THE GIT DIRECTORY
 $ ls -C .git
 This is the magic directory where all the git “stuff” is stored. Let’s peek in the objects directory.
@@ -135,3 +138,22 @@ The HEAD file contains a reference to the current branch.
 
 ???
 https://git-scm.com/docs/git-cat-file
+================================================================================
+
+CREATING A BRANCH (Lab 24)
+git checkout -b greet
+git status
+NOTE: git checkout -b <branchname> is a shortcut for git branch <branchname> followed by a git checkout <branchname>.
+
+The --all flag makes sure that we see all the branches. The default is to show only the current branch.
+
+
+............didn't take notes for a while...........
+
+
+PULLING CHANGES (Lab 44)
+git pull
+is indeed equivalent to the two steps:
+
+git fetch
+git merge origin/master
