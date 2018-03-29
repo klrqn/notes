@@ -1,5 +1,5 @@
 <script>
-$(document).ready(function(){
+$(document).ready(function(){ // run after everything has loaded
   $("element").addClass("someClass");
   $(".class").addClass("someClass");
   $("#id").addClass("someClass");
@@ -18,3 +18,16 @@ $(document).ready(function(){
   $("body").addClass("animated fadeOut");
 });
 </script>
+
+// Get JSON Data and Display.
+$("#getMessage").on("click", function() {
+  $.getJSON("/json/cats.json", function(json) {
+    var html = "";
+    json.forEach(function(val) {
+      var keys = Object.keys(val);
+      html += "<div class = 'cat'>";
+      keys.forEach(function(key) {
+      html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
+    });
+    html += "</div><br>";
+  });
