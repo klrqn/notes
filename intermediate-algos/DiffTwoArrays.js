@@ -1,3 +1,4 @@
+// MY SOLUTION
 function diffArray(arr1, arr2) {
     var newArr = [];
     var arr1Loc, arr2Loc;
@@ -14,7 +15,6 @@ function diffArray(arr1, arr2) {
         }
     }
     return newArr;
-        
 }
 
 // checks if a number is in an array - boolean
@@ -27,5 +27,25 @@ function isIn(arr, num) {
 }
 
 diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+
+// Intermediate Solution!
+function diffArray(arr1, arr2) {
+  return arr1
+    .concat(arr2)
+    .filter(
+        item => !arr1.includes(item) || !arr2.includes(item)
+    )
+}
+
+diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+
+// Advanced
+function diffArray(arr1, arr2) {
+    return arr1
+      .filter(el => !arr2.includes(el))
+      .concat(
+        arr2.filter(el => !arr1.includes(el))
+      )
+}
 
 diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
