@@ -1,0 +1,6 @@
+Variables               -   named values
+Parameters              -   names inputs
+Conditionals            -   handling different conditions
+Repitition
+Subroutines             -   named helper algorithms
+Recursion               -   define an algorithm in terms of itself
