@@ -152,6 +152,15 @@ var timesFour = oldArray.map(function(val){
   return val * 4;
 });
 
+// INDEXOF METHOD
+var beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+console.log(beasts.indexOf('bison'));
+// expected output: 1
+console.log(beasts.indexOf('bison', 2))
+// expected output: 4 - fromIndex 2 
+console.log(beasts.indexOf('giraffe'));
+// expected output: -1
+
 
 // REDUCE METHOD
 // The array method reduce is used to iterate through an array and condense it into one value.
@@ -169,6 +178,11 @@ var singleVal = arr.reduce(function(previousVal, currentVal) {
 array = array.filter(function(val) {
   return val !== 5;
 });
+var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+result = words.filter(word => word.length > 6);
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+
 
 // SORT METHOD
 var array = [1, 12, 21, 2];
@@ -194,3 +208,23 @@ arr = string.split(" ");
 
 //JOIN METHOD
 arr = string.join(" ");
+
+// SLICE METHOD
+var animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+console.log(animals.slice(2));
+// expected output: Array ["camel", "duck", "elephant"]
+console.log(animals.slice(2, 4));
+// expected output: Array ["camel", "duck"]
+console.log(animals.slice(1, 5));
+// expected output: Array ["bison", "camel", "duck", "elephant"]
+
+// SPREAD SYNTAX
+function sum(x, y, z) {
+  return x + y + z;
+}
+const numbers = [1, 2, 3];
+console.log(sum(...numbers));
+// expected output: 6
+console.log(sum.apply(null, numbers));
+// expected output: 6
+// Spread syntax allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.

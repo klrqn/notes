@@ -21,13 +21,14 @@ $(document).ready(function(){ // run after everything has loaded
 
 // Get JSON Data and Display.
 $("#getMessage").on("click", function() {
-  $.getJSON("/json/cats.json", function(json) {
+  $.getJSON("/json/cats.json", function(json) { // gets json
     var html = "";
     json.forEach(function(val) {
       var keys = Object.keys(val);
       html += "<div class = 'cat'>";
       keys.forEach(function(key) {
-      html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
+        html += "<strong>" + key + "</strong>: " + val[key] + "<br>";               // adds key and value text
+        html += "<img src= '" + val.imageLink + "'" + "alt=;" + val.altText + "'>"; // adds image
     });
     html += "</div><br>";
   });
