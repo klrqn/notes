@@ -4,14 +4,23 @@ function whatIsInAName(collection, source) {
   // Only change code below this line
   var sourceKey = Object.keys(source);
   console.log("source keys: \t\t" + Object.keys(source));
+  var sourceKeysCount = Object.keys(source).length;
+  var matchCount = 0;
   
-  for (i=0; i<collection.length; i++){
-      console.log("collection keys: \t" + Object.keys(collection[i]));
-      if (Object.keys(collection[i].hasOwnProperty(Object.keys(source)))) {
-          if (collection[i][sourceKey] == source[sourceKey]) {
-            arr.push(collection[i]);
-          }
+  for (i=0; i<collection.length; i++) {
+    matchCount = 0;
+    for (j=0; j<sourceKeysCount; j++) {
+      if (collection[i].hasOwnProperty(sourceKey[j])) {
+        console.log("collection[i] = " + collection[i]);
+        console.log("sourceKey[j] = " + sourceKey[j]);
+        if (collection[i][sourceKey] == source[sourceKey]) {
+          matchCount += 1;
+        }
+        if (matchCount === sourceKeysCount) {
+          arr.push(collection[i]);
+        }
       }
+    }
   }
   console.log('done');
   console.log(arr);
