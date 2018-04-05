@@ -1,4 +1,10 @@
-example 1, find the:
+================================================================================
+REFERENCE:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+================================================================================
+
+
+example 1, find 'the':
 
 /the/gi
 
@@ -27,3 +33,39 @@ input.replace(/\W/g, '')
 Note that \W is the equivalent of [^0-9a-zA-Z_] - it includes the underscore character. To also remove underscores use e.g.:
 "\\test\\red\\bob\\fred\\new".replace(/\W/g, '')
 "testredbobfrednew" // output
+
+================================================================================
+
+RegExp.prototype.exec()
+The exec() method executes a search for a match in a specified string. Returns a result array, or null.
+If you are executing a match simply to find true or false, use the RegExp.prototype.test() method or the String.prototype.search() method.
+
+var regex1 = RegExp('foo*','g');
+var str1 = 'table football, foosball';
+var array1;
+
+while ((array1 = regex1.exec(str1)) !== null) {
+  console.log(`Found ${array1[0]}. Next starts at ${regex1.lastIndex}.`);
+  // expected output: "Found foo. Next starts at 9."
+  // expected output: "Found foo. Next starts at 19."
+}
+
+
+RegExp.prototype.test()
+The test() method executes a search for a match between a regular expression and a specified string. Returns true or false.
+
+var regex1 = RegExp('foo*');
+var regex2 = RegExp('foo*','g');
+var str1 = 'table football';
+
+console.log(regex1.test(str1));
+// expected output: true
+
+console.log(regex1.test(str1));
+// expected output: true
+
+console.log(regex2.test(str1));
+// expected output: true
+
+console.log(regex2.test(str1));
+// expected output: false
