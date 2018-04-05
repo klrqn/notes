@@ -17,7 +17,10 @@ console.log(alphabet.charCodeAt('a'));
 // prints '97';
 console.log(alphabet.charCodeAt('b'));
 // prints '98';
-
+console.log(alphabet.charCodeAt('A'));
+// prints '97';
+console.log(alphabet.charCodeAt('B'));
+// prints '98';
 
 
 //fromCharCode
