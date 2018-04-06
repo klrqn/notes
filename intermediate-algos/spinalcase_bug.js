@@ -5,9 +5,10 @@ function spinalCase(str) {
   for (var i=1; i<a.length; i++){
     console.log('a[' + i + '] = ' + a[i]);
     if (a[i] == a[i].toUpperCase()) {
-      a.splice(i, 0, '-'); // TODO: BUG! Unshifts infinite loop...
-      i++;
+      console.log('a[i-1] = ' + a[i-1]);
+      a.splice(a[i-1], 0, '-'); // TODO: BUG! Unshifts infinite loop...
       console.log('a = ' + a);
+      i++;
     }
   }
   console.log(a.join('').toLowerCase());
