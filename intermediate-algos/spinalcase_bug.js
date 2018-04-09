@@ -8,7 +8,6 @@ function spinalCase(str) {
       console.log('a[i-1] = ' + a[i-1]);
       a.splice(a[i-1], 0, '-'); // TODO: BUG! Unshifts infinite loop...
       console.log('a = ' + a);
-      i++;
     }
   }
   console.log(a.join('').toLowerCase());

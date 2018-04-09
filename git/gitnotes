@@ -161,3 +161,10 @@ git fetch
 git merge origin/master
 
 Back at Lab 44 and need to continue! ouch~
+
+
+
+
+git config --global core.autocrlf 
+
+reread.
