@@ -1,18 +1,29 @@
-function sumFibs(num) {
-  var previousN = 0;
-  var currentN = 1;
-  var result = 0;
+function fibonacciArray(n) {
+  var previousFirst = 0, previousSecond = 1, next = 1, fibArray = [0, 1];;
   
-  while (currentN <= num){
-    if (currentN % 2 != 0) {
-      result += currentN;
-    }
-      currentN += previousN;
-      previousN = currentN - previousN;
+  for (var i=0; i<=n-3; i++){
+    next = previousFirst + previousSecond;
+    previousFirst = previousSecond;
+    previousSecond = next;
+    fibArray.push(next);
   }
-  console.log(result);
-  return result;
+  // console.log(fibArray);
+  return fibArray;
 }
 
+function sumOdds(arr) {
+  console.log(arr);
+  var sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    console.log("arr[" + i + "] = " + arr[i]);
+    console.log("sum = " + sum);
+    if (arr[i] % 2 == 1) {
+      console.log('adding to sum');
+      sum += arr[i];
+    }
+  }
+  return sum;
+}
 
-sumFibs(4);
+console.log(fibonacciArray(10));
+console.log(sumOdds(fibonacciArray(10)));
