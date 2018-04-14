@@ -5,7 +5,7 @@ function whatIsInAName(collection, source) {
   var sourceKey = Object.keys(source);
   console.log("source keys: \t\t" + Object.keys(source));
   
-  for (i=0; i<collection.length; i++){
+  for (var i=0; i<collection.length; i++){
       console.log("collection keys: \t" + Object.keys(collection[i]));
       if (Object.keys(collection[i].hasOwnProperty(Object.keys(source)))) {
           if (collection[i][sourceKey] == source[sourceKey]) {
