@@ -1,18 +1,20 @@
 
 function findElement(arr, func) {
+  // filter array with function provided
+  var filterArr = arr.filter(func); 
   
-  // var num;
+  // return the first element that returns true or undefined in none do
+  return filterArr[0];
   
-  for (var i=0; i<arr.length; i++) {
-    if (func(arr[i])) {
-      console.log(arr[i]);
-      // num = arr[i];
-      return arr[i];
-      // return num;
-    }
-  }
-  console.log(undefined);
-  return undefined;
+  // ===========
+  // as one line
+  return arr.filter(func)[0];
+  // alternately
+  return arr.filter(func).shift();
+  // ?
+  return arr.find(func);
+  // ===========
+  
 }
 
 findElement([1, 2, 3, 4], function(num){ 
