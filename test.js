@@ -15,3 +15,5 @@ console.log(oddOrEven(5));
 console.log(oddOrEven(7));
 console.log(oddOrEven(10000));
 console.log(oddOrEven('hello'));
+
+// test git test wtv
