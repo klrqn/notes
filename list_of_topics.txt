@@ -30,3 +30,5 @@ Selection
 Merge
 Quick
 Time Complexitiesa
+
+Where to start.
